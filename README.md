@@ -1,2 +1,0 @@
-pleiades-update-overlays
-========================
