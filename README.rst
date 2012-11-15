@@ -59,9 +59,10 @@ All keys and values must be encoded as UTF-8.
 1. Identification Items
 -----------------------
 
-id: string **required**
+id: string **required, n/a for new locations or names**
   The local id or short name for the object. For overlays that create new
-  objects, the value shall be -1.
+  objects, the value shall be prefaced with a single underscore so that it
+  may be referred to by other overlays.
 
 pid: number **required for locations and names, n/a for places**
   The id of the parent place.
@@ -192,6 +193,29 @@ have its details field updated like so::
   pid: 462310
   details: This villa was uncovered in 1920.
   references: ["http://www.heritagemalta.org/museums/domusromana/domushistory.html", "Domus Romana Museum Website, Heritage Malta", "See Further"]
+
+Adding a Place and a Location Simultaneously
+--------------------------------------------
+
+  id: _1
+  title: Road Station 
+  description: An unnamed road station between A and B.
+
+  pid: _1
+  title: NW corner
+  description: the NW corner of the site.
+  timePeriods: archaic, classical
+  featureTypes: station
+  paaid: survey-of-site-x-2010
+  geometry: { "type": "Point", "coordinates": [ 14.4001243, 35.8851671 ] }
+  references: ...
+  initialProvenance: ...
+
+And the CSV file::
+
+  id,pid,title,description,...
+  _1,,Road Station,An unnamed road station between A and B.,...
+  ,_1,NW corner,the NW corner of the site.,...
 
 Example Scripts
 ===============
