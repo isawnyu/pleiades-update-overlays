@@ -44,7 +44,7 @@ Other overlays can be sent as additional rows in the same file. On the
 Pleiades side, the overlay is extracted from the CSV file and the history of
 place 109390 is checked. If the current version is 3, the key:value items are
 applied to the object and it is recataloged. If the current version does not
-much the one in the overlay, the overlay is "stale". At the present time, we
+match the one in the overlay, the overlay is "stale". At the present time, we
 must reject such stale overlays and send them back to their source to be
 refreshed.
 
