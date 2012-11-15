@@ -197,6 +197,8 @@ have its details field updated like so::
 Adding a Place and a Location Simultaneously
 --------------------------------------------
 
+The overlays::
+
   id: _1
   title: Road Station 
   description: An unnamed road station between A and B.
