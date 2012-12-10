@@ -61,14 +61,30 @@ All keys and values must be encoded as UTF-8.
 
 id: string **required, n/a for new locations or names**
   The local id or short name for the object. For overlays that create new
-  objects, the value shall be prefaced with a single underscore so that it
-  may be referred to by other overlays.
+  objects, the value MUST be prefaced with a single underscore so that it may
+  be referred to by other overlays. The leading underscore is the way we
+  communicate that a new object is to be created. For new places, the
+  characters after the underscore are disregarded: an id is assigned by
+  Pleiades. When creating new places, there's no point in setting this value to
+  anything other than "_". For names and locations, there are 2 different paths
+  to creating ids:
+
+  - A value of "_" may be provided, in which case a short name for the new
+    object will be created from the given "title" item (see below). This is
+    exactly how things work in the forms on the Pleiades web site.
+  - A value of "_some_text_here" may be provided, in which case a short name
+    for the object is made from the string "some_text_here". All characters
+    will be converted to lowercase and all non-alphanumberic characters will be
+    converted to a single dash. This allows, for example, creation of a new
+    location with title "Point Location of Fort (Approx.)" and short name
+    "fort-location" (from "_fort location" or "_fort_location").
 
 pid: number **required for locations and names, n/a for places**
   The id of the parent place.
 
 version: number **required for updates, n/a for new overlays**
-  The base version to which the overlay is to be applied.
+  The base version to which the overlay is to be applied. Not required for
+  overlays that will create new objects.
 
 2. Common Overlay Items
 -----------------------
@@ -104,9 +120,16 @@ details: text
 
 references: JSON array
   References to **append** to the existing ones. A reference is a 3 part thing
-  and shall be formatted as a comma-separated list of Link, Label, Type enclosed
-  within square brackets. Multiple references can be encoded as a comma-separated
-  list of these square bracketed items. See example at the end of this document.
+  and shall be formatted as a comma-separated list of Link, Label, Type
+  enclosed within square brackets. Links are HTTP URIs, DOIs, ISSNs, or other
+  such standard unique identifiers such as
+  "http://data.perseus.org/citations/urn:cts:latinLit:phi0978.phi001.perseus-eng1:3.13".
+  Labels are the familiar short citations like "Plin. NH, 3.13", and Type is
+  "see also", "see further" (for places), "cites", or "cites as evidence".
+  Multiple references can be encoded as a comma-separated list of these square
+  bracketed items. See example at the end of this document and see also the
+  Pleiades citation guide:
+  http://pleiades.stoa.org/help/content/citation-guide.
 
 3. Additional Overlay Items for Locations and Names
 ---------------------------------------------------
